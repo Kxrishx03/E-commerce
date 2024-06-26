@@ -3,8 +3,24 @@ import { Announcement } from "../components/Announcement";
 import { Products } from "../components/Products";
 import { Newsletter } from "../components/Newsletter";
 import { Footer } from "../components/Footer";
+import { useLocation } from 'react-router-dom';
+import { useState } from "react";
 
 export function ProductList(){
+
+    const location = useLocation();
+    const cat = location.pathname.split("/")[2];
+    const [filters,setFilters] = useState({});
+    const [sort,setSort] = useState("newest");
+
+    const handleFilters= (e) => {
+        const value = e.target.value;
+        setFilters({
+            ...filters,
+            [e.target.name]:value
+        });
+    }
+     
     return (
         <div className="productList-container">
          <Announcement />
@@ -20,7 +36,7 @@ export function ProductList(){
               <div className="filter-text-product">
                 Filter Products:
 
-                <select name="Color" id="Color" className="select-filter">
+                <select name="Color" id="Color" className="select-filter" onChange={handleFilters}>
                     <option value="Color">Color</option>
                     <option value="red">Red</option>
                     <option value="orange">Orange</option>
@@ -34,7 +50,7 @@ export function ProductList(){
                     <option value="white">White</option>
                 </select>
 
-                <select id="sizes" name="sizes" className="select-filter">
+                <select id="sizes" name="sizes" className="select-filter" onChange={handleFilters}>
                    <option value="xs">Extra Small (XS)</option>
                    <option value="s">Small (S)</option>
                    <option value="m">Medium (M)</option>
@@ -48,7 +64,7 @@ export function ProductList(){
             <div className="filter-product">
             <div className="filter-text-product">
                 Sort Products:
-                <select id="sortOptions" name="sortOptions" className="select-filter">
+                <select id="sortOptions" name="sortOptions" className="select-filter" onChange={e=>setSort(e.target.value)}>
                     <option value="newest">Newest</option>
                     <option value="price-asc">Price: Low to High</option>
                     <option value="price-desc">Price: High to Low</option>
@@ -60,7 +76,7 @@ export function ProductList(){
 
          </div>
 
-         <Products />
+         <Products cat={cat} filters={filters} sort={sort}/>
          <Newsletter />
          <Footer />
         </div>

@@ -67,17 +67,17 @@ export function Footer(){
 
                 
               <div className="contact-item">
-               <MapIcon />
+               <MapIcon style={{marginRight:"8px"}} />
                122001,ABC Mew Zealand Roman
                </div>
 
                <div className="contact-item">
-               <PhoneIcon />
-               +199 234 567 890
+               <PhoneIcon style={{marginRight:"8px"}} />
+                  +199 234 567 890
                </div>
 
                <div className="contact-item">
-               <MailOutlineIcon/>
+               <MailOutlineIcon style={{marginRight:"8px"}}/>
                 contact@shopify.com
                </div>
   
