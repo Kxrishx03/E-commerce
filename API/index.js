@@ -7,6 +7,7 @@ const PORT = process.env.PORT;
 
 //IMPORTING ROUTES
 const userRoute = require("./routes/user");
+const authRoute = require("./routes/auth");
 
 
 
@@ -25,6 +26,7 @@ mongoose.connect(process.env.MONGO_URI,{
 //app
 app.use(express.json());
 app.use("/api/users",userRoute);
+app.use("/api/auths",authRoute);
 
 
 
