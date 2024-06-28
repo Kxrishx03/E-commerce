@@ -44,7 +44,10 @@ export function Slider() {
                            
                             <div className='btn-slider'>
                             <Link  to={"/products"}>
-                                <button>SHOP NOW</button>
+                                <button style={{padding:"10px",
+                                 fontSize:"20px",
+                                 backgroundColor:"transparent",
+                                 cursor:"pointer"}}>SHOP NOW</button>
                                 </Link>
                             </div>
                             
