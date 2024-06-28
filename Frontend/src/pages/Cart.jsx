@@ -12,7 +12,7 @@ const KEY = import.meta.env.VITE_STRIPE_KEY;
 
 
 export function Cart(){
-
+    const user = useSelector((state) => state.user.currentUser); 
     const cart = useSelector(state=>state.cart);
     const [stripeToken,setStripeToken] = useState(null);
     const navigate = useNavigate();
@@ -63,14 +63,24 @@ export function Cart(){
                        Your wishlist(0)
                      </span>
                </div>
-
+               <StripeCheckout
+                          name="SHOPIFY." 
+                          billingAddress
+                          shippingAddress
+                          description={`YOUR TOTAL IS ₹${cart.total}`} 
+                          image="https://img.icons8.com/?size=100&id=tLuf6TL8RS4h&format=png&color=000000"
+                          amount={cart.total*100}
+                          currency="INR"
+                          token={onToken}
+                          stripeKey={KEY} > 
                 
                     <button className="top-cart-btn-b">CHECKOUT NOW</button>
+                    </StripeCheckout>
                 </div>
 
                 <div className="bottom-cart">
                     <div className="bottom-cart-info">
-                       {cart.products.map(p=>(
+                       { user && cart.products.map(p=>(
                         
                      <div className="product-cart">
                         <div className="info-product-detail-cart">

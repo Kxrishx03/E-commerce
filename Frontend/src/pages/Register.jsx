@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { registerUser } from "../redux/apiCalls"; 
+
 
 export function Register() {
     const [email, setEmail] = useState("");
@@ -8,18 +7,7 @@ export function Register() {
     const [username, setUsername] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
 
-    const dispatch = useDispatch();
-    const { isFetching, registerError, registerSuccess } = useSelector((state) => state.user);
-
-    const handleClick = (e) => {
-        e.preventDefault();
-        if (password !== confirmPassword) {
-            alert("Passwords do not match!");
-            return;
-        }
-        dispatch(registerUser({ email, password, username }));
-    };
-
+    
     return (
         <div className="register-page-container">
             <div className="registration-wrapper">
@@ -37,11 +25,10 @@ export function Register() {
                     <div className="agreement-rp">
                         <span>By creating an account, I consent to the processing of my personal data in accordance with the <b>PRIVACY POLICY</b></span>
                     </div>
-                    <button className="registration-btn" onClick={handleClick} disabled={isFetching}>
-                        {isFetching ? "Registering..." : "REGISTER"}
+                    <button className="registration-btn" >
+                         REGISTER
                     </button>
-                    {registerError && <div className="error-message">{registerError}</div>}
-                    {registerSuccess && <div className="success-message">Registration successful!</div>}
+                   
                 </form>
             </div>
         </div>

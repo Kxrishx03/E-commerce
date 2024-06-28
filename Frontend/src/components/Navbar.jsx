@@ -1,14 +1,25 @@
-
 import SearchIcon from '@mui/icons-material/Search';
 import Badge from '@mui/material/Badge';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
+import { useDispatch } from 'react-redux';
+import { logout } from '../redux/userRedux';
 
 export function Navbar(){
-
+    
+    const user = useSelector((state) => state.user.currentUser); 
+    console.log(user);
     const quantity = useSelector(state=>state.cart.quantity);
-    console.log(quantity)
+    
+
+    const dispatch = useDispatch();
+
+    const handleClick = (e) => {
+        e.preventDefault();
+        dispatch(logout());
+    }
+   
     return (
         <div className="Navbar_container">
 
@@ -44,9 +55,9 @@ export function Navbar(){
                 </Link>
                  </div>
 
-                 <div className="menu-nav">
-                    SIGNIN
-                 </div>
+            
+                {user ? <div className="menu-nav" onClick={handleClick}>LOGOUT </div>:<div className="menu-nav"> <Link style={{textDecoration:"none",color:"black"}} to={"/login"}>SIGNIN </Link></div>}
+                 
 
                  <div className="menu-nav">
                  <Badge badgeContent={quantity} color="primary">
