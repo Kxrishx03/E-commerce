@@ -13,7 +13,7 @@ export function ProductList(){
     const [filters,setFilters] = useState({});
     const [sort,setSort] = useState("newest");
 
-    const handleFilters= (e) => {
+    const handleFilters = (e) => {
         const value = e.target.value;
         setFilters({
             ...filters,
@@ -23,11 +23,12 @@ export function ProductList(){
      
     return (
         <div className="productList-container">
-         <Announcement />
+        
          <Navbar />
+         <Announcement />
 
          <div className="title-dress-product">
-            <h1>Dresses</h1>
+            <h1>{cat}</h1>
          </div>
 
          <div className="product-filter-container">
@@ -36,26 +37,26 @@ export function ProductList(){
               <div className="filter-text-product">
                 Filter Products:
 
-                <select name="Color" id="Color" className="select-filter" onChange={handleFilters}>
+                <select name="color" id="Color" className="select-filter" onChange={handleFilters}>
                     <option value="Color">Color</option>
-                    <option value="red">Red</option>
-                    <option value="orange">Orange</option>
-                    <option value="yellow">Yellow</option>
-                    <option value="green">Green</option>
-                    <option value="blue">Blue</option>
-                    <option value="purple">Purple</option>
-                    <option value="pink">Pink</option>
-                    <option value="brown">Brown</option>
-                    <option value="black">Black</option>
-                    <option value="white">White</option>
+                    <option value="red">red</option>
+                    <option value="orange">orange</option>
+                    <option value="yellow">yellow</option>
+                    <option value="green">green</option>
+                    <option value="blue">blue</option>
+                    <option value="purple">purple</option>
+                    <option value="pink">pink</option>
+                    <option value="brown">brown</option>
+                    <option value="black">black</option>
+                    <option value="white">white</option>
                 </select>
 
-                <select id="sizes" name="sizes" className="select-filter" onChange={handleFilters}>
-                   <option value="xs">Extra Small (XS)</option>
-                   <option value="s">Small (S)</option>
-                   <option value="m">Medium (M)</option>
-                   <option value="l">Large (L)</option>
-                   <option value="xl">Extra Large (XL)</option>
+                <select id="sizes" name="size" className="select-filter" onChange={handleFilters}>
+                   <option value="XS">Extra Small (XS)</option>
+                   <option value="S">Small (S)</option>
+                   <option value="M">Medium (M)</option>
+                   <option value="L">Large (L)</option>
+                   <option value="XL">Extra Large (XL)</option>
                    <option value="xxl">Double Extra Large (XXL)</option>
                 </select>
               </div>
@@ -76,7 +77,7 @@ export function ProductList(){
 
          </div>
 
-         <Products cat={cat} filters={filters} sort={sort}/>
+         <Products cat={cat} filters={filters} sort={sort} />
          <Newsletter />
          <Footer />
         </div>

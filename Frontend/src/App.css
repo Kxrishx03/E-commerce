@@ -478,7 +478,7 @@
 .product-page-image-conatiner >img{
     width: 100%;
     height: 90vh;
-    object-fit: cover;
+    
 }
 .product-page-info-container{
     flex: 1;

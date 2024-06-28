@@ -11,6 +11,7 @@ const authRoute = require("./routes/auth");
 const productRoute = require("./routes/product");
 const cartRoute = require("./routes/cart");
 const orderRoute = require("./routes/order");
+const paymentRoute = require("./routes/stripe");
 
 //connect to db
 mongoose.connect(process.env.MONGO_URI,{
@@ -24,6 +25,21 @@ mongoose.connect(process.env.MONGO_URI,{
 });
 
 
+//CORS error
+
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', 'http://localhost:5173');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+
+    // Handle preflight requests
+    if (req.method === 'OPTIONS') {
+        res.sendStatus(200);
+    } else {
+        next();
+    }
+});
+
 //app
 app.use(express.json());
 app.use("/api/users",userRoute);
@@ -31,4 +47,5 @@ app.use("/api/auths",authRoute);
 app.use("/api/products",productRoute);
 app.use("/api/carts",cartRoute);
 app.use("/api/orders",orderRoute);
+app.use("/api/checkout",paymentRoute);
 

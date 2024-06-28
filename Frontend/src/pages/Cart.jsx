@@ -1,8 +1,44 @@
 import { Navbar } from "../components/Navbar";
 import { Announcement } from "../components/Announcement";
 import { Footer } from "../components/Footer";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import StripeCheckout from "react-stripe-checkout";
+import { useEffect, useState } from "react";
+import {userRequest} from "../requestMethods";
+import {useNavigate} from "react-router-dom";
+
+const KEY = import.meta.env.VITE_STRIPE_KEY; 
+console.log(KEY);
 
 export function Cart(){
+
+    const cart = useSelector(state=>state.cart);
+    const [stripeToken,setStripeToken] = useState(null);
+    const navigate = useNavigate();
+
+    const onToken = (token) =>{
+        setStripeToken(token);
+    }
+    
+    useEffect(()=>{
+        const makeRequest = async () =>{
+            try{
+                const res  = await userRequest.post("/checkout/payment",{
+                    tokenId : stripeToken.id,
+                    amount: cart.total*100
+                });
+                navigate.push("/success",{data:res.data});
+            } catch(err) {
+                console.log(err);
+            }
+        }
+       stripeToken && makeRequest();
+    }
+   
+    ,[stripeToken,cart.total,navigate]);
+
+    console.log(stripeToken);
     return (
         <div className="cart-container">
         <Navbar />
@@ -14,7 +50,9 @@ export function Cart(){
                 </h1>
 
                 <div className="top-cart">
-                    <button className="top-cart-btn-a">CONTINUE SHOPPING</button>
+                   <Link to={"/products"}>
+                   <button className="top-cart-btn-a">CONTINUE SHOPPING</button>
+                   </Link>
                     <div className="top-cart-texts">
                      <span className="top-cart-text">
                        Shopping Bag(2)
@@ -30,16 +68,17 @@ export function Cart(){
 
                 <div className="bottom-cart">
                     <div className="bottom-cart-info">
-
+                       {cart.products.map(p=>(
+                        
                      <div className="product-cart">
                         <div className="info-product-detail-cart">
-                            <img src="https://remixvintageshoes.com/cdn/shop/products/Re-Mix-Amazon-Black-Left_900x.jpg?v=1674518069" alt="" className="cart-image" />
+                            <img src={p.image} alt="" className="cart-image" />
                             <div className="detail-cart">
-                            <div className="product-name-cart"><b>PRODUCT:</b>RE-MIX VINTAGE SHOES</div>
-                            <div className="product-id-cart"><b>ID:</b>23451045E</div>
+                            <div className="product-name-cart" style={{textTransform:"uppercase"}}><b>PRODUCT:</b>{p.title}</div>
+                            <div className="product-id-cart"><b>ID:</b>{p._id}</div>
                             <div className="product-color-cart"><b>COLOR:</b>
-                            <div className="product-color-cart-a"></div></div>
-                            <div className="product-size-cart"><b>SIZE:</b>37.5</div> 
+                            <div className="product-color-cart-a" style={{backgroundColor:p.color}}></div></div>
+                            <div className="product-size-cart"><b>SIZE:</b>{p.size}</div> 
                            </div> 
                     </div>
 
@@ -47,70 +86,53 @@ export function Cart(){
                                 
                              <div className="amount-container-cart-page">
                                  <div className="remove-button-cart">-</div>
-                                 <div className="amount-cp">1</div>
+                                 <div className="amount-cp">{p.quantity}</div>
                                  <div className="add-button-cart">+</div>
                              </div>
 
                              <div className="actual-price-cp">
-                                $30.09
+                             ₹{p.price}
                              </div>
 
                         </div>
 
                      </div>
+                     
+                       ))}
 
-                       <hr className="line-cart" />
-
-                     <div className="product-cart">
-                        <div className="info-product-detail-cart">
-                            <img src="https://remixvintageshoes.com/cdn/shop/products/Re-Mix-Aviator-Blue-Combo-Right2_900x.jpg?v=1674518330" alt="" className="cart-image" />
-                            <div className="detail-cart">
-                            <div className="product-name-cart"><b>PRODUCT:</b>RE-MIX VINTAGE SHOES</div>
-                            <div className="product-id-cart"><b>ID:</b>2345001045E</div>
-                            <div className="product-color-cart"><b>COLOR:</b>
-                            <div className="product-color-cart-a"></div></div>
-                            <div className="product-size-cart"><b>SIZE:</b>37.5</div> 
-                           </div> 
-                    </div>
-
-                        <div className="price-cart-detail">
-                                
-                             <div className="amount-container-cart-page">
-                                 <div className="remove-button-cart">-</div>
-                                 <div className="amount-cp">2</div>
-                                 <div className="add-button-cart">+</div>
-                             </div>
-
-                             <div className="actual-price-cp">
-                                $39.09
-                             </div>
-
-                        </div>
-
-                     </div>
-
+                      
                     </div>
 
                     <div className="bottom-cart-summary">
                         <div className="summary-title-cart"><h1>ORDER SUMMARY</h1></div>
                         <div className="summary-item-cart">
                             <span className="summary-text">SUBTOTAL</span>
-                            <div className="summary-price">$69.09</div>
+                            <div className="summary-price">₹{cart.total}</div>
                         </div>
                         <div className="summary-item-cart">
                             <div className="summary-text">ESTIMATED SHIPPING</div>
-                            <div className="summary-price">$9.09</div>
+                            <div className="summary-price">₹90</div>
                         </div>
                         <div className="summary-item-cart">
                             <div className="summary-text">DISCOUNT SHIPPING</div>
-                            <div className="summary-price">-$9.09</div>
+                            <div className="summary-price">-₹90</div>
                         </div>
                         <div className="summary-item-cart">
                             <div className="summary-text" style={{fontSize:"24px",fontWeight:"500"}}>TOTAL</div>
-                            <div className="summary-price" style={{fontSize:"24px",fontWeight:"500"}}>$69.09</div>
+                            <div className="summary-price" style={{fontSize:"24px",fontWeight:"500"}}>₹{cart.total}</div>
                         </div>
-
+                        <StripeCheckout
+                          name="SHOPIFY." 
+                          billingAddress
+                          shippingAddress
+                          description={`YOUR TOTAL IS ₹${cart.total}`} 
+                          image="https://img.icons8.com/?size=100&id=tLuf6TL8RS4h&format=png&color=000000"
+                          amount={cart.total*100}
+                          currency="INR"
+                          token={onToken}
+                          stripeKey={KEY} >
                         <button className="checkout">CHECKOUT NOW</button>
+                        </StripeCheckout>
                     </div>
 
                 </div>

@@ -2,8 +2,13 @@
 import SearchIcon from '@mui/icons-material/Search';
 import Badge from '@mui/material/Badge';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { useSelector } from 'react-redux';
+import { Link } from "react-router-dom";
 
 export function Navbar(){
+
+    const quantity = useSelector(state=>state.cart.quantity);
+    console.log(quantity)
     return (
         <div className="Navbar_container">
 
@@ -24,9 +29,11 @@ export function Navbar(){
 
                 <div className="center-nav">
                  <div className="logo-nav">
+                  <Link style={{textDecoration:"none",color:"black",textAlign:"center"}} to={'/'} >
                   <h1>
                   SHOPIFY.
                   </h1>
+                  </Link>
                  </div>
                 </div>
 
@@ -40,8 +47,10 @@ export function Navbar(){
                  </div>
 
                  <div className="menu-nav">
-                 <Badge badgeContent={4} color="primary">
+                 <Badge badgeContent={quantity} color="primary">
+                 <Link style={{color:"black"}} to={"/cart"}>
                  <ShoppingCartIcon />
+                 </Link>
                   </Badge>
                  </div>
 
