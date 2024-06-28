@@ -13,7 +13,7 @@ export function Products({ cat, filters , sort }) {
               const res = await axios.get(
                   cat
                       ? `https://e-commerce-pi-steel.vercel.app/api/products?category=${cat}`
-                      : "https://e-commerce-pi-steel.vercel.app/api/products"
+                      : "https://e-commerce-pi-steel.vercel.app/api/products/"
               );
              
               if (res.data && Array.isArray(res.data.products)) {
