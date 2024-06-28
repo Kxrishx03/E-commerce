@@ -41,13 +41,13 @@ export function Slider() {
                             <div className="desc-slider">
                                 <p>{item.desc}</p>
                             </div>
-                            <Link  to={"/products"}>
+                           
                             <div className='btn-slider'>
-                            
+                            <Link  to={"/products"}>
                                 <button>SHOP NOW</button>
-                            
+                                </Link>
                             </div>
-                            </Link>
+                            
                         </div>
                     </div>
                 ))}

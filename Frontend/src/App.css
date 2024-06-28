@@ -175,7 +175,7 @@
     letter-spacing: 3px;
 }
 
-.btn-slider > button{
+.btn-slider > Link > button{
    padding: 10px;
    font-size: 20px;
    background-color: transparent;
