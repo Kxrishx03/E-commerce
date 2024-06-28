@@ -9,7 +9,7 @@ import {userRequest} from "../requestMethods";
 import {useNavigate} from "react-router-dom";
 
 const KEY = import.meta.env.VITE_STRIPE_KEY; 
-console.log(KEY);
+
 
 export function Cart(){
 
@@ -28,7 +28,9 @@ export function Cart(){
                     tokenId : stripeToken.id,
                     amount: cart.total*100
                 });
-                navigate.push("/success",{data:res.data});
+                navigate("/success", {
+                    state: { stripeData: res.data, products: cart },
+                  });
             } catch(err) {
                 console.log(err);
             }
@@ -38,7 +40,7 @@ export function Cart(){
    
     ,[stripeToken,cart.total,navigate]);
 
-    console.log(stripeToken);
+    
     return (
         <div className="cart-container">
         <Navbar />
@@ -55,7 +57,7 @@ export function Cart(){
                    </Link>
                     <div className="top-cart-texts">
                      <span className="top-cart-text">
-                       Shopping Bag(2)
+                       Shopping Bag({cart.quantity})
                      </span>
                      <span className="top-cart-text">
                        Your wishlist(0)

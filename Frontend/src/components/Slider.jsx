@@ -42,7 +42,9 @@ export function Slider() {
                                 <p>{item.desc}</p>
                             </div>
                             <div className='btn-slider'>
+                            <Link style={{textDecoration:"none",color:"black"}} to={"/products"}>
                                 <button>SHOP NOW</button>
+                            </Link>
                             </div>
                         </div>
                     </div>

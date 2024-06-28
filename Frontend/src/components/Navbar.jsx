@@ -39,7 +39,9 @@ export function Navbar(){
 
                 <div className="right-nav">
                  <div className="menu-nav">
+                 <Link style={{textDecoration:"none",color:"black"}} to={"/register"}>
                     REGISTER
+                </Link>
                  </div>
 
                  <div className="menu-nav">
