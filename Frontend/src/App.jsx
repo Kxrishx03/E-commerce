@@ -11,10 +11,11 @@ import {
   Routes,
   Route
 } from "react-router-dom";
+import { useSelector } from 'react-redux';
 
 function App() {
 
-  const user = false;
+  const user = useSelector((state) => state.user.currentUser);
   return (
     <Router>
       <Routes>
