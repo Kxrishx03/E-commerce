@@ -3,7 +3,7 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { useState } from 'react';
 import { sliderItems } from '../Data';
 import { IconButton } from '@mui/material';
-
+import { Link } from "react-router-dom";
 export function Slider() {
     const [slideIndex, setSlideIndex] = useState(0);
 
