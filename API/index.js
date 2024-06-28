@@ -51,7 +51,7 @@ app.use("/api/carts",cartRoute);
 app.use("/api/orders",orderRoute);
 app.use("/api/checkout",paymentRoute);
 
-app.get('/',(_ , res)=>{
-    return res.json({message : 'hello'})
-})
+// app.get('/',(_ , res)=>{
+//     return res.json({message : 'hello'})
+// })
 
