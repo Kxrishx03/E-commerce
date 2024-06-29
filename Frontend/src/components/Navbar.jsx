@@ -60,7 +60,7 @@ export function Navbar(){
                  
 
                  <div className="menu-nav">
-                 <Badge badgeContent={quantity} color="primary">
+                 <Badge badgeContent={user?quantity:0} color="primary">
                  <Link style={{color:"black"}} to={"/cart"}>
                  <ShoppingCartIcon />
                  </Link>

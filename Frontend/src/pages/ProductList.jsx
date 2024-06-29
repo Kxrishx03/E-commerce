@@ -65,7 +65,7 @@ export function ProductList(){
             <div className="filter-product">
             <div className="filter-text-product">
                 Sort Products:
-                <select id="sortOptions" name="sortOptions" className="select-filter" onChange={e=>setSort(e.target.value)}>
+                <select id="sortOptions" name="sortOptions" className="select-filter" onChange={(e)=>setSort(e.target.value)}>
                     <option value="newest">Newest</option>
                     <option value="price-asc">Price: Low to High</option>
                     <option value="price-desc">Price: High to Low</option>

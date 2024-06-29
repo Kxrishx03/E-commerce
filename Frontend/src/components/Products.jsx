@@ -16,12 +16,9 @@ export function Products({ cat, filters , sort }) {
                       : "https://e-commerce-pi-steel.vercel.app/api/products/"
               );
              
-              if (res.data && Array.isArray(res.data.products)) {
+              if (res.data ) {
                   setProducts(res.data.products);
-              } else {
-                  console.warn("API did not return an array:", res.data);
-                  setProducts([]);
-              }
+              } 
           } catch (err) {
               console.error("Error fetching products:", err);
               setProducts([]);
