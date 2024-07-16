@@ -81,7 +81,6 @@ export function Cart(){
                 <div className="bottom-cart">
                     <div className="bottom-cart-info">
                        { user && cart.products.map(p=>(
-                        
                      <div className="product-cart">
                         <div className="info-product-detail-cart">
                             <img src={p.image} alt="" className="cart-image" />
@@ -119,11 +118,11 @@ export function Cart(){
                         <div className="summary-title-cart"><h1>ORDER SUMMARY</h1></div>
                         <div className="summary-item-cart">
                             <span className="summary-text">SUBTOTAL</span>
-                            <div className="summary-price">{user ? `₹${cart.total}` : `₹0`}</div>
+                            <div className="summary-price">₹{cart.total}</div>
                         </div>
                         <div className="summary-item-cart">
                             <div className="summary-text">ESTIMATED SHIPPING</div>
-                            <div className="summary-price"><div className="summary-price">{user ? `₹${cart.total}` : `₹0`}</div></div>
+                            <div className="summary-price"><div className="summary-price">₹{cart.total}</div></div>
                         </div>
                         <div className="summary-item-cart">
                             <div className="summary-text">DISCOUNT SHIPPING</div>
@@ -131,7 +130,7 @@ export function Cart(){
                         </div>
                         <div className="summary-item-cart">
                             <div className="summary-text" style={{fontSize:"24px",fontWeight:"500"}}>TOTAL</div>
-                            <div className="summary-price" style={{fontSize:"24px",fontWeight:"500"}}><div className="summary-price">{user ? `₹${cart.total}` : `₹0`}</div>
+                            <div className="summary-price" style={{fontSize:"24px",fontWeight:"500"}}><div className="summary-price">₹{cart.total}</div>
                         </div>
                         </div>
                         <StripeCheckout
