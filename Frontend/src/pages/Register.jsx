@@ -1,21 +1,20 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { register } from "../redux/apiCalls";
+import { useNavigate } from "react-router-dom";
 
 export function Register() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [username, setUsername] = useState("");
-    
+    const navigate = useNavigate();
     const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log("Form submitted with:", { username, email, password });
-        
+        e.preventDefault();    
         try {
             const response =  register(username, email, password);
             console.log("Registration response:", response);
             if (response) {
-                window.location.replace("/login");
+                navigate("/login");
             }
         } catch (error) {
             console.error("Registration error:", error);
