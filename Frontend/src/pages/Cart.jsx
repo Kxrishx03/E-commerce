@@ -119,19 +119,20 @@ export function Cart(){
                         <div className="summary-title-cart"><h1>ORDER SUMMARY</h1></div>
                         <div className="summary-item-cart">
                             <span className="summary-text">SUBTOTAL</span>
-                            <div className="summary-price">₹{cart.total}</div>
+                            <div className="summary-price">{user ? `₹${cart.total}` : `₹0`}</div>
                         </div>
                         <div className="summary-item-cart">
                             <div className="summary-text">ESTIMATED SHIPPING</div>
-                            <div className="summary-price">₹90</div>
+                            <div className="summary-price"><div className="summary-price">{user ? `₹${cart.total}` : `₹0`}</div></div>
                         </div>
                         <div className="summary-item-cart">
                             <div className="summary-text">DISCOUNT SHIPPING</div>
-                            <div className="summary-price">-₹90</div>
+                            <div className="summary-price">-₹0</div>
                         </div>
                         <div className="summary-item-cart">
                             <div className="summary-text" style={{fontSize:"24px",fontWeight:"500"}}>TOTAL</div>
-                            <div className="summary-price" style={{fontSize:"24px",fontWeight:"500"}}>₹{cart.total}</div>
+                            <div className="summary-price" style={{fontSize:"24px",fontWeight:"500"}}><div className="summary-price">{user ? `₹${cart.total}` : `₹0`}</div>
+                        </div>
                         </div>
                         <StripeCheckout
                           name="SHOPIFY." 
