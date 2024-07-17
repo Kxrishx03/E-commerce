@@ -10,11 +10,11 @@ export function Products({ cat, filters , sort }) {
   useEffect(() => {
       const getProducts = async () => {
           try {
-              const res = await axios.get(
-                  cat
-                      ? `http://localhost:3000/api/products?category=${cat}`
-                      : "http://localhost:3000/api/products/"
-              );
+            const res = await axios.get(
+                cat
+                    ? `https://e-commerce-pi-steel.vercel.app/api/products?category=${cat}`
+                    : "https://e-commerce-pi-steel.vercel.app/api/products/"
+            );
              
               if (res.data ) {
                   setProducts(res.data.products);
