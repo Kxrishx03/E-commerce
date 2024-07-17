@@ -78,9 +78,9 @@ export function Product(){
                       <div className="filter-product-page">
                       <div className="filter-text-product-page">Size</div> 
                       <select onChange={(e) => setSize(e.target.value)}  id="sizes" name="sizes" className="select-filter-page">
-                                {product.size && product.size.map((s, index) => (
+                     {product.size && product.size.map((s, index) => (
                                     <option key={index} value={s}>{s}</option>
-                                ))}
+                     ))}
                       </select>
                       </div>
 

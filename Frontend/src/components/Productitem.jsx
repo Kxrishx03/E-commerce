@@ -19,7 +19,7 @@ export function Product({item}){
                 </div>
 
                 <div className="icon-product">
-                 <Link to={`/product/${item._id}`} >
+                 <Link to={`/product/${item._id}`} style={{textDecoration:"inheirt"}} >
                  <SearchIcon />
                  </Link>
                 </div>
