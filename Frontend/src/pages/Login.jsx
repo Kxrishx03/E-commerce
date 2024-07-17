@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { login } from "../redux/apiCalls";
 import { useDispatch, useSelector } from "react-redux";
+import { clearCart } from "../redux/cartRedux";
 
 export function Login(){
     const [username,setUsername] = useState("");
@@ -10,7 +11,14 @@ export function Login(){
 
     const handleClick = (e) =>{
             e.preventDefault();
-            login(dispatch,{username,password});
+            login(dispatch,{username,password})
+            .then(() => {
+                dispatch(clearCart()); 
+            })
+            .catch((err) => {
+                console.log("Login error:", err);
+                
+            });
     }
     return (
         <div className="register-page-container">
