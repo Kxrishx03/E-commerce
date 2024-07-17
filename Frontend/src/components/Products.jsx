@@ -12,8 +12,8 @@ export function Products({ cat, filters , sort }) {
           try {
               const res = await axios.get(
                   cat
-                      ? `https://e-commerce-pi-steel.vercel.app/api/products?category=${cat}`
-                      : "https://e-commerce-pi-steel.vercel.app/api/products/"
+                      ? `http://localhost:3000/api/products?category=${cat}`
+                      : "http://localhost:3000/api/products/"
               );
              
               if (res.data ) {
